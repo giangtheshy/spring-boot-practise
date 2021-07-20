@@ -1,0 +1,42 @@
+version: '3.5'
+services:
+  app:
+    restart: always
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: app-spring
+    container_name: app-spring
+    environment:
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME: ${MYSQL_USER}
+      SPRING_DATASOURCE_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    networks:
+      - spring_boot
+  mysql:
+    image: mysql
+    container_name: mysql
+    restart: always
+    ports:
+      - "3307:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    cap_add:
+      - SYS_NICE  # CAP_SYS_NICE
+    networks:
+      - spring_boot
+
+networks:
+  spring_boot:
+    driver: bridge
+volumes:
+  mysql_data:
