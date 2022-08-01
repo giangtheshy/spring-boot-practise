@@ -1,8 +1,6 @@
-package com.bobvu.tinherbackend.elasticsearch;
+package com.practise.elasticsearch;
 
-import com.bobvu.tinherbackend.cassandra.model.Gender;
-import com.bobvu.tinherbackend.cassandra.model.Image;
-import com.bobvu.tinherbackend.cassandra.model.Passion;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,8 +22,7 @@ public class User {
     @Id
     private String username;
 
-    private List<Passion> passions;
-    private Gender gender;
+
 
     private long boostTime;
 

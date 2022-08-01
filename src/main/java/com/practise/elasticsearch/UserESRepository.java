@@ -1,4 +1,4 @@
-package com.bobvu.tinherbackend.elasticsearch;
+package com.practise.elasticsearch;
 
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
