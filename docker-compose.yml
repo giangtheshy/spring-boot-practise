@@ -38,7 +38,7 @@ services:
     ports:
       - '${ELASTIC_SEARCH_PORT}:${ELASTIC_SEARCH_PORT}'
     volumes:
-      - es_data:/usr/share/elasticsearch/data
+      - es_data:/var/lib/elasticsearch
     networks:
       - spring_boot
   mysql:
@@ -64,3 +64,4 @@ networks:
     driver: bridge
 volumes:
   mysql_data:
+  es_data:
