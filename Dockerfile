@@ -1,8 +1,8 @@
+FROM maven:3.6.3-jdk-11-slim AS build
+    COPY src /home/app/src
+    COPY pom.xml /home/app
+    RUN mvn -f /home/app/pom.xml clean package -DskipTests=true
+
 FROM openjdk:11
-
-LABEL version="1.0"
-LABEL description="Spring Boot Application"
-
-ADD target/*.jar app.jar
-#ENTRYPOINT ["java","-jar","app.jar"]
-CMD java -Xdebug  -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:5005 -Djava.security.egd=file:/dev/./urandom -jar app.jar
+COPY --from=build /home/app/target/*.jar app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
