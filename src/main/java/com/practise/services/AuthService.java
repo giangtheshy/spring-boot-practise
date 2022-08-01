@@ -16,6 +16,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.elasticsearch.common.geo.GeoPoint;
 
 import java.util.List;
 import java.util.Set;
@@ -67,4 +68,30 @@ public class AuthService {
   public Set<Role> mapToRole(Set<Role> roles){
     return roles.stream().map(role->roleRepository.findByName(role.getName())).collect(Collectors.toSet());
   }
+
+  public com.practise.elasticsearch.User toEsEntity(com.practise.models.User user) {
+        if ( user == null ) {
+            return null;
+        }
+
+        com.practise.elasticsearch.User.UserBuilder user1 = com.practise.elasticsearch.User.builder();
+
+        double lon = 111D;
+        double lat =222D;
+
+        GeoPoint geoPoint = new GeoPoint(lat, lon);
+
+        user1.location(geoPoint);
+
+        user1.username( user.getUsername() );
+
+        List<Passion> list1 = user.getPassions();
+        if ( list1 != null ) {
+            user1.passions( new ArrayList<Passion>( list1 ) );
+        }
+        user1.gender( user.getGender() );
+        user1.yearOfBirth( user.getDateOfBirth().getYear() );
+
+        return user1.build();
+    }
 }
