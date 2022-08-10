@@ -66,5 +66,5 @@ networks:
   spring_boot:
     driver: bridge
 volumes:
-  mysql_data:
-  es_data:
+  mysql_data: {}
+  es_data: {}
