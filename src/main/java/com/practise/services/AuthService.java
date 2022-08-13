@@ -88,12 +88,12 @@ public class AuthService {
 
         com.practise.elasticsearch.User.UserBuilder user1 = com.practise.elasticsearch.User.builder();
 
-        double lon = 111D;
-        double lat =222D;
-
-        GeoPoint geoPoint = new GeoPoint(lat, lon);
-
-        user1.location(geoPoint);
+//        double lon = 111D;
+//        double lat =222D;
+//
+//        GeoPoint geoPoint = new GeoPoint(lat, lon);
+//
+//        user1.location(geoPoint);
 
         user1.username( user.getUsername() );
 

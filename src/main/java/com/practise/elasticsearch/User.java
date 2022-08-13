@@ -26,8 +26,8 @@ public class User {
 
     private long boostTime;
 
-    @GeoPointField
-    private GeoPoint location;
+//    @GeoPointField
+//    private GeoPoint location;
     private int yearOfBirth;
 
 }
